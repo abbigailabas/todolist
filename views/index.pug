@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/css/stylesheet.css')
+
+    body
+        include ./header.pug
+        div #{deleteMassage}
+        -var tasks = JSON.parse(tea)
+        h1 current to do list items:
+        -for(var i in tasks)
+            div
+                label(for="taskName") #{tasks[i].taskName}
+                label(for="date") #{tasks[i].date}
+                a(class="deleteBtn" href="/delete/"+tasks[i].id onclick="return confirm('R U SURE?')") Delete Task
+        include ./footer.pug
