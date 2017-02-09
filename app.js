@@ -29,13 +29,41 @@ app.get('/', function (req, res) {
             'index', {
                 name: "Rye and Ginger",
                 title: "Get shift done yo",
-                url: "http://banditbrewery.ca/",
+                // url: "http://banditbrewery.ca/",
                 tea: data,
                 deleteMassage: deleteMassage
             });
     });
     console.log(req.body);
 
+});
+
+//sort by alphabetically
+app.get('/sortByTitle', function (req, res) {
+    fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
+        tasks = JSON.parse(data); //turn it into a js property
+        tasks.sort(sortBy('taskName'));
+        sortedTasks = JSON.stringify(tasks);
+        res.render(
+            'index', {
+                tea: sortedTasks
+            });
+    });
+    console.log(req.body);
+});
+
+//sort by date
+app.get('/sortByDate', function (req, res) {
+    fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
+        dates = JSON.parse(data); //turn it into a js property
+        tasks.sort(sortBy('date'));
+        sortedDate = JSON.stringify(dates);
+        res.render(
+            'index', {
+                tea: sortedDate
+            });
+    });
+    console.log(req.body);
 });
 
 //for adding a new task
