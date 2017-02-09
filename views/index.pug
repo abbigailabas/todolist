@@ -14,4 +14,5 @@ html
                 label(for="taskName") #{tasks[i].taskName}
                 label(for="date") #{tasks[i].date}
                 a(class="deleteBtn" href="/delete/"+tasks[i].id onclick="return confirm('R U SURE?')") Delete Task
+        a(class="sortAlphabetical", href="#") Sort Alphabetically
         include ./footer.pug
