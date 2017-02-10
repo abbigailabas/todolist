@@ -1,27 +1,72 @@
 * {
     font-family: futura;
-    background-color: lemonchiffon;
+    background-color: antiquewhite;
+    font-size: 1em;
 }
 
-.title, .mainBtns {
+.title, .mainBtns, .sortBtns, .footer, .deleteMassage {
     text-align: center;
 }
-
-a { /* button underline */
-    text-decoration: none;
-    /*color: white;*/
-    border: 3px solid #232323;
-    z-index: 2;
-    padding: 2%;
-    margin: 0 2%;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    text-decoration: none;
+.deleteMassage {
+    padding: 2em;
 }
-    .homeBtn, .addBtn {
-        margin: 2%;
+
+a {
+    text-decoration: none; /* button underline */
+    /*border: 3px solid #232323;*/
+    z-index: 2;
+    padding: 0.5em;
+    margin: 0 0.5em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: 1em;
+}
+    .homeBtn, .addBtn, .sortAlphabetical, .sortDate {
+        color: blueviolet;
+        border-bottom: 2px solid;
+    }
+
+    .deleteBtn {
+        color: red;
     }
 
 h1 {
     text-align: center;
+    font-size: 2em;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none; /* no bullet points*/
+    width: 50%;
+    margin: 0 auto;
+}
+    li {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+
+@media screen and (max-width: 870px) {
+    ul {
+        width: 75%;
+        /*background-color: pink;*/
+    }
+}
+@media screen and (max-width: 740px) {
+    ul {
+        width: 100%;
+        /*background-color: lightblue;*/
+    }
 }

@@ -6,14 +6,19 @@ html
 
     body
         include ./header.pug
-        div #{deleteMassage}
+        div.deleteMassage #{deleteMassage}
         -var tasks = JSON.parse(tea)
-        h1 current to do list items:
+        h1 Things to do:
+        div.items
         -for(var i in tasks)
-            div
-                label(for="taskName" class="takeNameLabel") #{tasks[i].taskName}
-                label(for="date" class="dateLabel") #{tasks[i].date}
-                a(class="deleteBtn" href="/delete/"+tasks[i].id onclick="return confirm('R U SURE?')") Delete Task
-        a(class="sortAlphabetical", href="/sortByTitle") Sort Alphabetically
-        a(class="sortDate", href="/sortByDate") Sort By Date
+            ul
+                li
+                    label(for="taskName" class="takeNameLabel") #{tasks[i].taskName}
+                li
+                    label(for="date" class="dateLabel") #{tasks[i].date}
+                li
+                    a(class="deleteBtn" href="/delete/"+tasks[i].id onclick="return confirm('Are you sure you wish Delete this?')") Delete Task
+        div.sortBtns
+            a(class="sortAlphabetical", href="/sortByTitle") Sort Alphabetically
+            a(class="sortDate", href="/sortByDate") Sort By Date
         include ./footer.pug
