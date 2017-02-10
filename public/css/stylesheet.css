@@ -13,15 +13,13 @@
 
 a {
     text-decoration: none; /* button underline */
-    /*border: 3px solid #232323;*/
-    z-index: 2;
     padding: 0.5em;
     margin: 0 0.5em;
     box-sizing: border-box;
     text-decoration: none;
     font-size: 1em;
 }
-    .homeBtn, .addBtn, .sortAlphabetical, .sortDate {
+    .homeBtn, .addBtn, .sortAlphabetical, .sortDate, .submitBtn {
         color: blueviolet;
         border-bottom: 2px solid;
     }
@@ -56,7 +54,37 @@ footer {
     text-align: center;
 }
 
+/***********
+form styles / add.pug
+***********/
+form {
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+    padding: 5% 0%;
+    font-size: 1.2em;
+}
+    .formLabel {
+        display: block;
+        padding: 2% 0%;
+    }
+    input {
+        border: none;
+        border-bottom: 2px solid black;
+        background-color: transparent;
+        padding: 2% 0%;
+    }
 
+    .submitBtn {
+        color: blueviolet;
+        border-bottom: 2px solid;
+        margin-top: 5%;
+    }
+
+
+/***********
+Media Styles yo
+***********/
 
 @media screen and (max-width: 870px) {
     ul {
