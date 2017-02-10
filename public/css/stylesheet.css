@@ -7,8 +7,12 @@
 .title, .mainBtns, .sortBtns, .footer, .deleteMassage {
     text-align: center;
 }
-.deleteMassage {
+.deleteMessage {
     padding: 2em;
+    text-align: center;
+    width: 25%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 a {
@@ -19,7 +23,7 @@ a {
     text-decoration: none;
     font-size: 1em;
 }
-    .homeBtn, .addBtn, .sortAlphabetical, .sortDate, .submitBtn {
+    .homeBtn, .addBtn, .sortAlphabetical, .sortDate, .submitBtn, .closeBtn {
         color: blueviolet;
         border-bottom: 2px solid;
     }

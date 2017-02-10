@@ -6,8 +6,9 @@ html
 
     body
         include ./header.pug
-        div.deleteMassage #{deleteMassage}
-            //a(class="closeMessage" href="/") close message
+        if(deleteMessage != '')
+          div.deleteMessage #{deleteMessage}
+            a(href='/' class="closeBtn") close
         -var tasks = JSON.parse(tea)
         h1 Things to do:
         div.items

@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 
 //Handle our Requests
 app.get('/', function (req, res) {
-    var deleteMassage = req.query.message || "";
+    var deleteMessage = req.query.message || "";
     console.log(req.query.message)
     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
         console.log(data);
@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
                 title: "Get shift done",
                 // url: "http://banditbrewery.ca/",
                 tea: data,
-                deleteMassage: deleteMassage
+                deleteMessage: deleteMessage
             });
     });
     console.log(req.body);
