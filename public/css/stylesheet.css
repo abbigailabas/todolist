@@ -21,3 +21,7 @@ a { /* button underline */
     .homeBtn, .addBtn {
         margin: 2%;
     }
+
+h1 {
+    text-align: center;
+}
