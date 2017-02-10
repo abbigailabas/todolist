@@ -57,7 +57,7 @@ app.get('/sortByTitle', function (req, res) {
 app.get('/sortByDate', function (req, res) {
     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
         date = JSON.parse(data); //turn it into a js property
-        tasks.sort(sortBy('date'));
+        date.sort(sortBy('date'));
         sortedDate = JSON.stringify(date);
         res.render(
             'index', {
