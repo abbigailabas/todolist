@@ -40,6 +40,7 @@ app.get('/', function (req, res) {
 
 //sort by alphabetically
 app.get('/sortByTitle', function (req, res) {
+    var deleteMessage = req.query.message || "";
     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
         tasks = JSON.parse(data); //turn it into a js property
         tasks.sort(sortBy('taskName'));
@@ -47,7 +48,8 @@ app.get('/sortByTitle', function (req, res) {
         res.render(
             'index', {
                 title: "Get shift done",
-                tea: sortedTasks
+                tea: sortedTasks,
+                deleteMessage: deleteMessage
             });
     });
     console.log(req.body);
@@ -55,6 +57,7 @@ app.get('/sortByTitle', function (req, res) {
 
 //sort by date
 app.get('/sortByDate', function (req, res) {
+    var deleteMessage = req.query.message || "";
     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
         date = JSON.parse(data); //turn it into a js property
         date.sort(sortBy('date'));
@@ -62,7 +65,8 @@ app.get('/sortByDate', function (req, res) {
         res.render(
             'index', {
                 title: "Get shift done",
-                tea: sortedDate
+                tea: sortedDate,
+                deleteMessage: deleteMessage
             });
     });
     console.log(req.body);
