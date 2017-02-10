@@ -28,7 +28,7 @@ app.get('/', function (req, res) {
         res.render(
             'index', {
                 name: "Rye and Ginger",
-                title: "Get shift done yo",
+                title: "Get shift done",
                 // url: "http://banditbrewery.ca/",
                 tea: data,
                 deleteMassage: deleteMassage
@@ -46,6 +46,7 @@ app.get('/sortByTitle', function (req, res) {
         sortedTasks = JSON.stringify(tasks);
         res.render(
             'index', {
+                title: "Get shift done",
                 tea: sortedTasks
             });
     });
@@ -55,11 +56,12 @@ app.get('/sortByTitle', function (req, res) {
 //sort by date
 app.get('/sortByDate', function (req, res) {
     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-        dates = JSON.parse(data); //turn it into a js property
+        date = JSON.parse(data); //turn it into a js property
         tasks.sort(sortBy('date'));
-        sortedDate = JSON.stringify(dates);
+        sortedDate = JSON.stringify(date);
         res.render(
             'index', {
+                title: "Get shift done",
                 tea: sortedDate
             });
     });
@@ -71,8 +73,8 @@ app.get('/add', function (req, res) {
 
     res.render(
         'add', {
-            title: "Get shft done yo",
-            url: "http://banditbrewery.ca/"
+            title: "Get shft done",
+            // url: "http://banditbrewery.ca/"
         });
 });
 

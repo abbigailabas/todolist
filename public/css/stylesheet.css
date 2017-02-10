@@ -2,3 +2,22 @@
     font-family: futura;
     background-color: lemonchiffon;
 }
+
+.title, .mainBtns {
+    text-align: center;
+}
+
+a { /* button underline */
+    text-decoration: none;
+    /*color: white;*/
+    border: 3px solid #232323;
+    z-index: 2;
+    padding: 2%;
+    margin: 0 2%;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+    .homeBtn, .addBtn {
+        margin: 2%;
+    }

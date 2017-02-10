@@ -11,8 +11,8 @@ html
         h1 current to do list items:
         -for(var i in tasks)
             div
-                label(for="taskName") #{tasks[i].taskName}
-                label(for="date") #{tasks[i].date}
+                label(for="taskName" class="takeNameLabel") #{tasks[i].taskName}
+                label(for="date" class="dateLabel") #{tasks[i].date}
                 a(class="deleteBtn" href="/delete/"+tasks[i].id onclick="return confirm('R U SURE?')") Delete Task
         a(class="sortAlphabetical", href="/sortByTitle") Sort Alphabetically
         a(class="sortDate", href="/sortByDate") Sort By Date
