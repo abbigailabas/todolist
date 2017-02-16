@@ -39,36 +39,40 @@ MongoClient.connect(url, function (err, db) { // making the connection to mongoD
 });
 // ADD THE MONGODB CONNECTION CODE ABOVE -- END
 
-//Home page
+// Home page
 app.get('/', function (req, res) {
+    var deleteMessage = req.query.message || "";
     const db = req.app.locals.db;
     db.collection('todo', function (err, collection) {
         collection.find().toArray(function (err, items) {
-            res.render('index', {
-                users: items
+            console.log(items);
+            res.render('index', { /* loading the index first */
+                users: items,
+                deleteMessage: deleteMessage
             });
-}); });
+        });
+    });
 });
 
 
-//add the add.pug page
+// add the add.pug page
 app.get('/add', function (req, res) {
     res.render('add', {
         title: "Get shift done"
     });
 });
 
-//adding the new to do list item
+//add a POST for the add.pug page so we can post task items
 app.post('/', function (req, res) {
     req.body.id = randomID(10);
     // req.body.img = "/images/doggo.gif";
     const db = req.app.locals.db;
-    db.collection('todo', function (err, collection) {
-        collection.insert(req.body, function (err, result) {
-            console.log('Inserted %d documents into the "todo" collection:', result.length, result);
+    db.collection('todo', function (err, collection) { /* go into collection todo */
+        collection.insert(req.body, function (err, result) { /* insert into todo collection */
+            console.log('Inserted %d documents into the "todo" collection:', result.length, result); /* put the stuff you just added into the todo collection */
         });
-        collection.find().toArray(function (err, items) {
-            res.render('index', {
+        collection.find().toArray(function (err, items) { /* now go into the collection , turn it into a json array */
+            res.render('index', { /* and display it all in the index */
                 users: items,
                 success: "Your task was added to the list"
             });
@@ -77,124 +81,39 @@ app.post('/', function (req, res) {
 });
 
 
-//Handle our Requests
-// app.get('/', function (req, res) {
-//     var deleteMessage = req.query.message || "";
-//     console.log(req.query.message)
-//     // fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-//         console.log(data);
-//         res.render(
-//             'index', {
-//                 title: "Get shift done",
-//                 tea: data,
-//                 deleteMessage: deleteMessage
-//             });
-//     });
-//     console.log(req.body);
-//
-// });
-//
-// //sort by alphabetically
+//deleting a task
+app.get('/delete/:id', function (req, res) {
+    const db = req.app.locals.db;
+    console.log(req.params.id);
+    db.collection('todo', function (err, collection) {
+        collection.deleteOne({
+            id: req.params.id
+        }, function (err, result) {
+            console.log('Deleted the record.');
+            collection.find().toArray(function (err, items) {
+                res.redirect('/?message=task was deleted'); /* the message when you deleted something */
+            });
+        });
+    });
+});
+
+
+
+//SORTING IT OUT YO
 // app.get('/sortByTitle', function (req, res) {
-//     var deleteMessage = req.query.message || "";
-//     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-//         tasks = JSON.parse(data); //turn it into a js property
-//         tasks.sort(sortBy('taskName'));
-//         sortedTasks = JSON.stringify(tasks);
-//         res.render(
-//             'index', {
-//                 title: "Get shift done",
-//                 tea: sortedTasks,
-//                 deleteMessage: deleteMessage
+//     const db = req.app.locals.db;
+//     console.log(req.params.id);
+//
+//         db.collection('todo').find().toArray(function (err, items) {
+//         db.collection('todo').sort({"taskName":1})
+//             res.render('index', {
+//                 users: items
+//                 // success: "Your Dog Was Added to the List"
 //             });
-//     });
-//     console.log(req.body);
-// });
-//
-// //sort by date
-// app.get('/sortByDate', function (req, res) {
-//     var deleteMessage = req.query.message || "";
-//     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-//         date = JSON.parse(data); //turn it into a js property
-//         date.sort(sortBy('date'));
-//         sortedDate = JSON.stringify(date);
-//         res.render(
-//             'index', {
-//                 title: "Get shift done",
-//                 tea: sortedDate,
-//                 deleteMessage: deleteMessage
-//             });
-//     });
-//     console.log(req.body);
-// });
-//
-// //for adding a new task
-// app.get('/add', function (req, res) {
-//
-//     res.render(
-//         'add', {
-//             title: "Get shft done",
-//             // url: "http://banditbrewery.ca/"
 //         });
-// });
-
-// Home
-// app.post('/', function (req, res) {
-//     console.log(req.body);
-//     var formData = req.body;
-//     // console.log(req.body.name);
-//     // req.body.img = "/images/doggo.gif";
-//     req.body.id = randomID(10);
-//     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-//
-//         console.log(data);
-//             console.log("i entered")
-//             data = JSON.parse(data);
-//             data.push(req.body);
-//             req.body.id = randomID(10);
-//             data = JSON.stringify(data);
-//             fs.writeFile(__dirname + "/data/tasks.json", data, function (err) {
-//                 if (err) {
-//                     console.log(err.message);
-//                     return;
-//                 }
-//                 res.redirect('/');
-//                 console.log("The file was saved!");
-//             });
 //     });
-// });
 
 
-// app.get('/delete/:id', function (req, res) {
-//     var taskId = req.params.id;
-//     console.log(taskId);
-//     fs.readFile(__dirname + "/data/tasks.json", 'utf8', function (err, data) {
-//         tasks = JSON.parse(data);
-//         // iterate over each element in the array
-//         for (var i = 0; i < tasks.length; i++) {
-//             // look for the entry with a matching 'id' value
-//             if (tasks[i].id == taskId) {
-//                 // we found it
-//                 tasks.splice(i, 1);
-//                 //delete users[i];
-//                 //console.log(users);
-//                 //var user = JSON.stringify(users[i]);
-//             }
-//         }
-//         console.log(tasks);
-//         tasks = JSON.stringify(tasks);
-//         fs.writeFile(__dirname + "/data/tasks.json", tasks, function (err) {
-//             if (err) {
-//                 console.log(err.message);
-//                 return;
-//             }
-//             res.redirect('/?message=task was deleted');
-//             console.log("The file was deleted!");
-//
-//         });
-//
-//     });
-// });
 
 //Start our server
 app.listen(3000, function () {
